@@ -1,3 +1,4 @@
+from pathlib import Path
 import numpy as np
 import numpy.ma as ma
 
@@ -18,13 +19,13 @@ def line_is_safe(reactor_data, axis=None):
     abs_adjacent_diffs = np.abs(adjacent_diffs)
     return safe & np.all((abs_adjacent_diffs != 0) & (abs_adjacent_diffs < 4), axis=axis)
 
-def solve(input_file_path) -> int:
+def solve1(input_file_path) -> int:
     with open(input_file_path) as file:
         reactor_data = read_input_as_masked_array(file.read())
         safe = line_is_safe(reactor_data, axis=1)
         return np.count_nonzero(safe)
 
-def solve_part2(input_file_path) -> int:
+def solve2(input_file_path) -> int:
     with open(input_file_path) as file:
         reactor_data = read_input_as_masked_array(file.read())
         safe_lines = 0
@@ -49,9 +50,9 @@ def solve_part2(input_file_path) -> int:
         return safe_lines
 
 def test_example():
-    assert solve("example_input.txt") == 2
-    assert solve_part2("example_input.txt") == 4
+    assert solve1(Path(__file__).parent/"example_input.txt") == 2
+    assert solve2(Path(__file__).parent/"example_input.txt") == 4
 
 if __name__ == "__main__":
-    print(solve("input.txt"))
-    print(solve_part2("input.txt"))
+    print(f"Solution 1: {solve1(Path(__file__).parent/"input.txt")}")
+    print(f"Solution 2: {solve2(Path(__file__).parent/"input.txt")}")

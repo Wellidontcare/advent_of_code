@@ -1,5 +1,19 @@
+[project]
+name = "advent-of-code-wellidontcare"
+dependencies = [
+    "numpy",
+    "scipy",
+    "binarytree"
+]
+requires-python = ">=3.13"
+description = "Personal solutions to advent of code"
+
+
+
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib"]
 python_files = ["*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
+
+
